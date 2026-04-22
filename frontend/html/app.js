@@ -1,19 +1,19 @@
 const tableBody = document.getElementById('team-table-body');
 const backendStatus = document.getElementById('backend-status');
 
-// Hacemos la petición al backend
+
 fetch('http://localhost:5000/api/team')
     .then(response => {
         if (!response.ok) {
             throw new Error('Error en la red');
         }
-        // Si responde bien, actualizamos el indicador a online
+        
         backendStatus.textContent = 'Online';
         backendStatus.className = 'online';
         return response.json();
     })
     .then(data => {
-        // Recorremos los datos y creamos las filas
+       
         data.forEach(member => {
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -28,7 +28,7 @@ fetch('http://localhost:5000/api/team')
     })
     .catch(error => {
         console.error('Error al obtener los datos:', error);
-        // Si falla, marcamos el backend como offline
+        
         backendStatus.textContent = 'Offline (Error de conexión)';
         backendStatus.className = 'offline';
     });
