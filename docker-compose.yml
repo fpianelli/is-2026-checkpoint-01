@@ -1,0 +1,22 @@
+services:
+  database:
+    image: postgres:16-alpine # Esto es lo que pidió ema
+    container_name: database
+    restart: always # Esto es lo vi por default, pero no se si es necesario
+    env_file:
+      - .env
+    environment: # Esto hay que configurarlo cada uno en su .env
+      POSTGRES_USER: ${POSTGRES_USER} # Por defecto es posgre crea un usuario con el mismo nombre que la base de datos
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB} # Por defecto es posgre crea una base de datos con el mismo nombre que el usuario
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db_data:
