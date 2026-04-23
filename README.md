@@ -82,3 +82,13 @@ Panel web para monitorear los contenedores Docker sin usar la terminal. Se comun
 Interfaz gráfica para administrar la base de datos durante el desarrollo. No forma parte de las features oficiales del Checkpoint 01. Se utilizó para hacer pruebas de eliminar registros en la base de datos y ver reflejados esos cambios en el frontend.
  
 ---
+
+### Primer acceso a Portainer y capturas de pantalla
+1. Login 
+![Pantalla de accesso a Portainer](capturas/login.png)
+2. Home
+![Pantalla Principal](capturas/pantalla_principal.png)
+3. Dashboard 
+![Dashboard con informacion de los contenedores](capturas/dashboard.png)
+4. Los 5 contenedores
+![Contenedores](capturas/contenedores.png)
