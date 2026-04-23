@@ -3,11 +3,11 @@
 Este es el repositorio para el Checkpoint 01 de la materia Ingeniería y Calidad de Software.
 
 ## Integrantes
-| Felipe | 31477 | Feature 01 | Coordination |
-| Santiago | 31481 | Feature 02 | Frontend |
-| Federico | 31147 | Feature 03 | Backend |
-| Tiago | 33374 | Feature 04 | Database |
-| Facundo | 32874 | Feature 05 | Portainer |
+| Felipe Pianelli | 31477 | Feature 01 | Coordination - Compose - README |
+| Santiago Sereno | 31481 | Feature 02 | Frontend |
+| Federico Alvarez Pieroni | 31147 | Feature 03 | Backend |
+| Tiago Solis | 33374 | Feature 04 | Database |
+| Facundo Gomez | 32874 | Feature 05 | Portainer |
 
 ## Prerrequisitos
  
@@ -59,3 +59,26 @@ docker compose ps
 | Portainer  | http://localhost:9000      | 
 | pgadmin    | http://localhost:5050      | Credenciales en `.env`  
 
+---
+ 
+## Servicios
+ 
+### Frontend 
+Página HTML simple servida por `python3 -m http.server`. El archivo `app.js` usa `fetch()` para consultar el endpoint `/api/team` del backend y renderiza la tabla de integrantes dinámicamente. Incluye un indicador visual del estado del backend (Online / Offline).
+ 
+### Backend 
+API REST escrita en Flask, servida con Gunicorn. Expone tres endpoints:
+- `GET /api/health` — estado del servicio (usado por el HEALTHCHECK de Docker)
+- `GET /api/info` — metadata del servicio
+- `GET /api/team` — lista de integrantes leída desde la tabla `members` de PostgreSQL
+ 
+### Database 
+PostgreSQL 16 Alpine. Se inicializa automáticamente al primer arranque mediante el script `database/init.sql`, que crea la tabla `members` e inserta una fila por cada integrante. Los datos persisten en el volumen nombrado `db_data`.
+ 
+### Portainer 
+Panel web para monitorear los contenedores Docker sin usar la terminal. Se comunica con el daemon de Docker montando el socket `/var/run/docker.sock`. Su configuración persiste en el volumen `portainer_data`.
+ 
+### pgadmin — herramienta auxiliar
+Interfaz gráfica para administrar la base de datos durante el desarrollo. No forma parte de las features oficiales del Checkpoint 01. Se utilizó para hacer pruebas de eliminar registros en la base de datos y ver reflejados esos cambios en el frontend.
+ 
+---
