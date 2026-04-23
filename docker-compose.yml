@@ -1,4 +1,22 @@
 services:
+  portainer:
+   image: portainer/portainer-ce:latest
+   container_name: portainer
+   restart: always
+   ports:
+    - "9000:9000"
+   volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - portainer_data:/data
+   networks:
+    - teamboard-net
+   deploy:
+    resources:
+     limits: 
+      cpus: "0.25"
+      memory: 256M
+  
+
   database:
     image: postgres:16-alpine # Esto es lo que pidió ema
     container_name: database
@@ -40,3 +58,4 @@ services:
 
 volumes:
   db_data:
+  portainer_data:
