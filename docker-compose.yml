@@ -11,10 +11,10 @@ services:
    networks:
     - teamboard-net
    deploy:
-    resources:
-     limits: 
-      cpus: "0.25"
-      memory: 256M
+     resources:
+       limits: 
+         cpus: "0.25"
+         memory: 256M
   
 
   database:
