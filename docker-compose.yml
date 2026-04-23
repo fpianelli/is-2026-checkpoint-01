@@ -3,8 +3,6 @@ services:
     image: postgres:16-alpine # Esto es lo que pidió ema
     container_name: database
     restart: always # Esto es lo vi por default, pero no se si es necesario
-    ports:
-      - "5432:5432"
     env_file:
       - .env
     environment: # Esto es para darle una configuración inicial cuando inicia
