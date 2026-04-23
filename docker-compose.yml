@@ -1,0 +1,42 @@
+services:
+  database:
+    image: postgres:16-alpine # Esto es lo que pidió ema
+    container_name: database
+    restart: always # Esto es lo vi por default, pero no se si es necesario
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    environment: # Esto es para darle una configuración inicial cuando inicia
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  
+  pgadmin:
+    image: dpage/pgadmin4:9.13 # Ema nos recomendó nunca usar la última versión, así que puse una anterior
+    container_name: pgadmin
+    restart: always
+    env_file:
+      - .env
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "8080:80"
+    depends_on:
+      - database
+
+
+
+
+
+volumes:
+  db_data:
