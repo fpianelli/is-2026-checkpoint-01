@@ -6,7 +6,7 @@ Este es el repositorio para el Checkpoint 01 de la materia Ingeniería y Calidad
 | Felipe Pianelli | 31477 | Feature 01 | Coordination - Compose - README |
 | Santiago Sereno | 31481 | Feature 02 | Frontend |
 | Federico Alvarez Pieroni | 31147 | Feature 03 | Backend |
-| Tiago Solis | 33374 | Feature 04 | Database |
+| Tiago Solis | 33374 | Feature 04 | Database - PgAdmin |
 | Facundo Gomez | 32874 | Feature 05 | Portainer |
 
 ## Prerrequisitos
